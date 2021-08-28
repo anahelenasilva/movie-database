@@ -8,8 +8,8 @@ import { Wrapper, Content, LogoImg, TMDBLogoImg } from './Header.styles';
 const Header = () => (
   <Wrapper>
     <Content>
-      <LogoImg src={RMDBLogo} alt="RMDBLogo" />
-      <TMDBLogoImg src={TMDBLogo} alt="TMDBLogo" />
+      <LogoImg src={RMDBLogo} alt='RMDBLogo' />
+      <TMDBLogoImg src={TMDBLogo} alt='TMDBLogo' />
     </Content>
   </Wrapper>
 )
