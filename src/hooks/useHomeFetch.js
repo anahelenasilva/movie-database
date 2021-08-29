@@ -14,6 +14,7 @@ export const useHomeFetch = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
 
   const fetchMovies = async (page, searchTerm = '') => {
     try {
@@ -42,5 +43,12 @@ export const useHomeFetch = () => {
 
   }, [searchTerm]) // it will run only when searchTerm changes and on first render
 
-  return { state, loading, error, setSearchTerm, searchTerm }
+  useEffect(() => {
+    if (!isLoadingMore) return
+
+    fetchMovies(state.page + 1, searchTerm)
+    setIsLoadingMore(false) // to avoid multiple calls  when user scrolls down
+  }, [isLoadingMore, state.page, searchTerm])
+
+  return { state, loading, error, setSearchTerm, searchTerm, setIsLoadingMore }
 }
