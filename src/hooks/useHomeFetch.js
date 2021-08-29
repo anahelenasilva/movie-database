@@ -13,6 +13,7 @@ export const useHomeFetch = () => {
   const [state, setState] = useState(inititalState)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
 
   const fetchMovies = async (page, searchTerm = '') => {
     try {
@@ -40,5 +41,5 @@ export const useHomeFetch = () => {
 
   }, [])//only when mount
 
-  return { state, loading, error }
+  return { state, loading, error, setSearchTermState: setSearchTerm }
 }

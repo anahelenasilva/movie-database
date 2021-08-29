@@ -6,7 +6,7 @@ import { Content, Wrapper } from './SearchBar.styles'
 
 const SearchBar = ({ setSearchTerm }) => {
 
-  const [searchTerm, setSearchTermState] = useState('')
+  const [state, setState] = useState('')
 
   return <Wrapper>
     <Content>
@@ -15,8 +15,8 @@ const SearchBar = ({ setSearchTerm }) => {
       <input
         type='text'
         placeholder='Search Movie'
-        onChange={event => setSearchTermState(event.currentTarget.value)}
-        value={searchTerm}
+        onChange={event => setState(event.currentTarget.value)}
+        value={state}
       />
 
     </Content>
