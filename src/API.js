@@ -20,6 +20,9 @@ export default {
     const endpoint = searchTerm
       ? `${SEARCH_BASE_URL}${searchTerm}&page=${page}`
       : `${POPULAR_BASE_URL}&page=${page}`;
+
+    console.log(endpoint)
+
     return await (await fetch(endpoint)).json();
   },
 

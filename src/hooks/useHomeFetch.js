@@ -15,14 +15,12 @@ export const useHomeFetch = () => {
   const [error, setError] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
 
-  console.log(searchTerm)
-
   const fetchMovies = async (page, searchTerm = '') => {
     try {
       setError(false)
       setLoading(true)
 
-      const movies = await API.fetchMovies(page, searchTerm)
+      const movies = await API.fetchMovies(searchTerm, page)
 
       setState(prev => ({
         ...movies,
@@ -39,9 +37,10 @@ export const useHomeFetch = () => {
 
   useEffect(() => {
 
-    fetchMovies(1)
+    setState(inititalState)
+    fetchMovies(1, searchTerm)
 
-  }, [])//only when mount
+  }, [searchTerm]) // it will run only when searchTerm changes and on first render
 
-  return { state, loading, error, setSearchTerm }
+  return { state, loading, error, setSearchTerm, searchTerm }
 }
