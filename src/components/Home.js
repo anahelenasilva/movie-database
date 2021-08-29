@@ -15,8 +15,6 @@ const Home = () => {
 
   const { state, loading, error } = useHomeFetch()
 
-  console.log(state)
-
   return (
     <>
       {state.results[0] && //short circuit
