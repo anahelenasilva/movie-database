@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config'
 
 import NoImage from '../images/no_image.jpg'
 
-const Home = () => {
-  const [state, setState] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
+import HeroImage from './HeroImage';
 
-  return <div>Home Page</div>
+import { useHomeFetch } from '../hooks/useHomeFetch'
+
+const Home = () => {
+
+  const { state, loading, error } = useHomeFetch()
+
+  console.log(state)
+
+  return (
+    <>
+      {state.results[0] && //short circuit
+        <HeroImage
+          image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.results[0].backdrop_path}`}
+          title={state.results[0].original_title}
+          text={state.results[0].overview}
+        />
+      }
+    </>
+  )
 }
 
 export default Home
