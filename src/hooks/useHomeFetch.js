@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import API from '../API';
+import { isPersistedState } from '../helpers';
 
 const inititalState = {
   page: 0,
@@ -38,6 +39,14 @@ export const useHomeFetch = () => {
 
   useEffect(() => {
 
+    if (!searchTerm) {
+      const sessionState = isPersistedState('homeState')
+      if (sessionState) {
+        setState(sessionState)
+        return
+      }
+    }
+
     setState(inititalState)
     fetchMovies(1, searchTerm)
 
@@ -49,6 +58,14 @@ export const useHomeFetch = () => {
     fetchMovies(state.page + 1, searchTerm)
     setIsLoadingMore(false) // to avoid multiple calls  when user scrolls down
   }, [isLoadingMore, state.page, searchTerm])
+
+  useEffect(() => {
+
+    if (!searchTerm) {
+      sessionStorage.setItem('homeState', JSON.stringify(state))
+    }
+
+  }, [searchTerm, state])
 
   return { state, loading, error, setSearchTerm, searchTerm, setIsLoadingMore }
 }
