@@ -68,3 +68,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+# Roadmap
+- Create a page to show the movies from an actor
+- Create a filter to show the movies from a specific year
+- Create a page to show the movies from a specific genre
