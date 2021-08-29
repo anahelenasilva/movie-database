@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config'
 
@@ -15,6 +16,7 @@ const MovieInfo = ({ movie }) => (
         image={movie.poster_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}` : NoImage}
         clickable={false}
         alt='movie thumbnail'
+        movieId={movie.id}
       />
 
       <Text>
@@ -41,5 +43,8 @@ const MovieInfo = ({ movie }) => (
   </Wrapper>
 )
 
+MovieInfo.propTypes = {
+  movie: PropTypes.object.isRequired
+}
 
 export default MovieInfo
