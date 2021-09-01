@@ -74,3 +74,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 - Create a filter to show the movies from a specific year
 - Create a page to show the movies from a specific genre
 - Store the movies in a database
+- Add a footer
