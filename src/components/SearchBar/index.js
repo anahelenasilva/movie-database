@@ -1,48 +1,42 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import searchIcon from '../../images/search-icon.svg'
 
 import { Content, Wrapper } from './SearchBar.styles'
 
-class SearchBar extends Component {
+const SearchBar = ({ setSearchTerm }) => {
 
-  state = {
-    value: '',
-  }
+  const [state, setState] = useState('')
+  const initial = useRef(true)
 
-  timeout = null
+  useEffect(() => {
 
-  componentDidUpdate(_prevProps, prevState) {
-    if (prevState.value !== this.state.value) {
-      const { setSearchTerm } = this.props
-
-      clearTimeout(this.timeout)
-
-      this.timeout = setTimeout(() => {
-        const { value } = this.state
-        setSearchTerm(value)
-      }, 500)
+    if (initial.current) {
+      initial.current = false
+      return
     }
-  }
 
-  render() {
-    const { value } = this.state
-    return <Wrapper>
-      <Content>
+    const timer = setTimeout(() => {
+      setSearchTerm(state)
+    }, 500)
 
-        <img src={searchIcon} alt='A magnifying glass search icon' />
-        <input
-          type='text'
-          placeholder='Search Movie'
-          onChange={event => this.setState({ value: event.currentTarget.value })}
-          value={value}
-        />
+    return () => clearTimeout(timer)
+  }, [setSearchTerm, state])
 
-      </Content>
-    </Wrapper >
-  }
+  return <Wrapper>
+    <Content>
 
+      <img src={searchIcon} alt='A magnifying glass search icon' />
+      <input
+        type='text'
+        placeholder='Search Movie'
+        onChange={event => setState(event.currentTarget.value)}
+        value={state}
+      />
+
+    </Content>
+  </Wrapper>
 }
 
 SearchBar.propTypes = {
